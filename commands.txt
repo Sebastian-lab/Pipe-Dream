@@ -1,0 +1,6 @@
+Getting into the virtual environment: source .venv/bin/activate
+
+launching local test servers for mongodb: uvicorn mongodb:app --reload --host 0.0.0.0 --port 8000
+
+launching local test server for frontend (Vite): npm run dev -- --host
+

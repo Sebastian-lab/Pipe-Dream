@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+requests
+pymongo
+certifi
+python-dotenv

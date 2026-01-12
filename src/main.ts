@@ -15,14 +15,12 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <h1>Pipe-Dream</h1>
     <div class="card">
       <button id="counter" type="button"></button>
-      <button id="fetch-btn" type="button">Get Live Data</button>
     </div>
     <div id="table-container"></div>
   </div>
 `
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
-setupWeatherWidget(
-  document.querySelector<HTMLButtonElement>('#fetch-btn')!, 
+setupWeatherWidget( 
   document.querySelector<HTMLDivElement>('#table-container')!
 )

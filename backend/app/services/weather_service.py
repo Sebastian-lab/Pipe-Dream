@@ -25,53 +25,49 @@ def fetch_external_weather(lat, lng):
         return None
 
 def get_city_readings():
-    """Main service logic to get weather data with caching"""
+    """Get weather readings, keep last 10 per city"""
     collection = get_db_collection("city_readings")
-    results = []
+    cities = []
 
-    for index, city in enumerate(CITIES):
-        # 1. Check DB for recent data
+    for city in CITIES:
         cached_doc = collection.find_one({"city": city["name"]})
-        
-        needs_update = True
-        if cached_doc:
-            last_updated = cached_doc.get("updated_at")
-            if last_updated and (datetime.utcnow() - last_updated) < timedelta(minutes=settings.REFRESH_INTERVAL_MINUTES):
-                needs_update = False
-                results.append(cached_doc["data"])
+        readings = cached_doc.get("readings", []) if cached_doc else []
+        last_updated = cached_doc.get("updated_at") if cached_doc else None
 
-        # 2. If missing or stale, fetch new data
+        # Only fetch new data if stale
+        needs_update = True
+        if last_updated and (datetime.utcnow() - last_updated) < timedelta(minutes=settings.REFRESH_INTERVAL_MINUTES):
+            needs_update = False
+
         if needs_update:
             weather_data = fetch_external_weather(city["lat"], city["lng"])
-            
             if weather_data:
                 temp_c = weather_data.get("temperature")
-                # Calculate F
                 temp_f = round((temp_c * 9/5) + 32, 2) if temp_c is not None else None
-                
-                reading = {
-                    "id": index + 1,
-                    "city": city["name"],
+
+                new_reading = {
                     "tempC": temp_c,
                     "tempF": temp_f,
                     "timezone": city["timezone"],
                     "localTime": datetime.now().isoformat()
                 }
-                
-                # Upsert into MongoDB
+
+                # Push new reading, keep last 10
                 collection.update_one(
                     {"city": city["name"]},
                     {
-                        "$set": {
-                            "updated_at": datetime.utcnow(),
-                            "data": reading
-                        }
+                        "$set": {"updated_at": datetime.utcnow()},
+                        "$push": {"readings": {"$each": [new_reading], "$slice": -10}}
                     },
                     upsert=True
                 )
-                results.append(reading)
-            elif cached_doc:
-                # Fallback to old data if API fails
-                results.append(cached_doc["data"])
-    
-    return results
+
+                readings.append(new_reading)  # also add to local copy for returning
+
+        # Return full city object with readings
+        cities.append({
+            "city": city["name"],
+            "readings": readings[-10:]  # ensure only last 10
+        })
+
+    return cities

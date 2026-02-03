@@ -75,10 +75,10 @@ def get_city_readings():
             "readings": readings[-10:]  # ensure only last 10
         })
     
-    get_city_history()
+    #get_city_history()
     return cities
 
-def get_city_history():
+def get_city_history_debugger():
     collection = get_db_collection("city_readings")
     data = []
     for city in CITIES:
@@ -97,3 +97,23 @@ def get_city_history():
     for x in data:
         print(x) #19:58:20
     return 0
+
+def get_city_history():
+    collection = get_db_collection("city_readings")
+    cities = []
+
+    for city in CITIES:
+        cached_doc = collection.find_one({"city": city["name"]})
+        readings = []
+
+        if cached_doc and "readings" in cached_doc and cached_doc["readings"]:
+            # Grab most recent reading (you already keep them sliced to last 10)
+            latest_reading = cached_doc["readings"][-1]
+            readings = [latest_reading]
+
+        cities.append({
+            "city": city["name"],
+            "readings": readings  # size 0 or 1
+        })
+
+    return cities

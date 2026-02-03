@@ -1,4 +1,4 @@
-import { fetchWeatherReadings } from '../api/weather';
+import { fetchWeatherHistory, fetchWeatherReadings } from '../api/weather';
 import { formatCityTime } from '../utils/formatting';
 import type { CityReading, Reading } from '../types';
 
@@ -121,7 +121,14 @@ export function setupWeatherWidget(displayContainer: HTMLDivElement) {
     }, delay);
   }
 
+async function loadHistory() {
+  const history = await fetchWeatherHistory();
+  renderTable(history);
+}
+
+
   // --- STARTUP ---
+  loadHistory();
   fetchData();       // initial prefetch
   schedulePrefetch(); // recursive prefetching
   scheduleRender();   // clock-aligned rendering

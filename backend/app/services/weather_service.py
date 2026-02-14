@@ -30,7 +30,7 @@ def fetch_external_weather(lat, lng):
         return None
 
 def get_city_readings():
-    """Get weather readings, keep last 10 per city"""
+    """Get weather readings, keep last 1000 per city"""
     collection = get_db_collection("city_readings")
     cities = []
 
@@ -57,12 +57,12 @@ def get_city_readings():
                     "localTime": datetime.now().isoformat()
                 }
 
-                # Push new reading, keep last 10
+                # Push new reading, keep last 1000
                 collection.update_one(
                     {"city": city["name"]},
                     {
                         "$set": {"updated_at": datetime.utcnow()},
-                        "$push": {"readings": {"$each": [new_reading], "$slice": -10}}
+                        "$push": {"readings": {"$each": [new_reading], "$slice": -1000}}
                     },
                     upsert=True
                 )
@@ -72,13 +72,13 @@ def get_city_readings():
         # Return full city object with readings
         cities.append({
             "city": city["name"],
-            "readings": readings[-10:]  # ensure only last 10
+            "readings": readings[-1000:]  # ensure only last 1000
         })
     
-    get_city_history()
+    #get_city_history()
     return cities
 
-def get_city_history():
+def get_city_history_debugger():
     collection = get_db_collection("city_readings")
     data = []
     for city in CITIES:
@@ -97,3 +97,23 @@ def get_city_history():
     for x in data:
         print(x) #19:58:20
     return 0
+
+def get_city_history():
+    collection = get_db_collection("city_readings")
+    cities = []
+
+    for city in CITIES:
+        cached_doc = collection.find_one({"city": city["name"]})
+        readings = []
+
+        if cached_doc and "readings" in cached_doc and cached_doc["readings"]:
+            # Grab most recent reading (you already keep them sliced to last 1000)
+            latest_reading = cached_doc["readings"][-1]
+            readings = [latest_reading]
+
+        cities.append({
+            "city": city["name"],
+            "readings": readings  # size 0 or 1
+        })
+
+    return cities

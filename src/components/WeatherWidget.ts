@@ -1,4 +1,4 @@
-import { fetchWeatherReadings } from '../api/weather';
+import { fetchWeatherHistory, fetchWeatherReadings } from '../api/weather';
 import { formatCityTime } from '../utils/formatting';
 import type { CityReading, Reading } from '../types';
 
@@ -30,13 +30,27 @@ export function setupWeatherWidget(displayContainer: HTMLDivElement) {
           <td>${city.city}</td>
           <td>${latest.tempC ?? '-'}</td>
           <td>${latest.tempF ?? '-'}</td>
-          <td>${formatCityTime(latest.timezone)}</td>
+          <td>${formatCityTime(latest.localTime, latest.timezone)}</td>
         </tr>
       `;
     }).join('');
 
-    const now = new Date();
-    const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    let formattedTime = "Unknown";
+
+    const lastCity = data[data.length - 1];
+    const lastReading = lastCity?.readings[lastCity.readings.length - 1];
+
+    if (lastReading?.localTime) {
+      const date = new Date(lastReading.localTime);
+
+      if (!isNaN(date.getTime())) {
+        formattedTime = date.toLocaleTimeString([], {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+      }
+    }
 
     displayContainer.innerHTML = `
       <table class="temp-table">
@@ -121,7 +135,14 @@ export function setupWeatherWidget(displayContainer: HTMLDivElement) {
     }, delay);
   }
 
+async function loadHistory() {
+  const history = await fetchWeatherHistory();
+  renderTable(history);
+}
+
+
   // --- STARTUP ---
+  loadHistory();
   fetchData();       // initial prefetch
   schedulePrefetch(); // recursive prefetching
   scheduleRender();   // clock-aligned rendering

@@ -1,9 +1,11 @@
-export function formatCityTime(timezone?: string): string {
+export function formatCityTime(localTime: string, timezone?: string): string {
   if (!timezone) return "Unknown";
   
-  return new Date().toLocaleTimeString('en-US', {
+  const date = new Date(localTime);
+  
+  return date.toLocaleTimeString('en-US', {
     timeZone: timezone, 
-    hour: '2-digit', 
+    hour: 'numeric', 
     minute: '2-digit',
     hour12: true,
     timeZoneName: 'short'

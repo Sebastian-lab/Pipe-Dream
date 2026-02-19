@@ -25,4 +25,16 @@
 └── style.css
 
 To do:
+    Front end (Navigation plus formatting of table/graphs)
+    Security
+    networking (on AWS?)
+    ML (On monday once data has been saved)
+    
+
+Future implentation:
+    kubernetes
+    Data collection should send a heartbeat/signal to the backend to update the table.
+    user login (cwt)
     Simultaneous API calls so that the localTimes are the same
+    
+

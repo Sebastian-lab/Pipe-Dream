@@ -1,5 +1,65 @@
+@font-face {
+  font-family: 'delargodtblackitalic';
+  src: url('https://static.wfonts.com/data/2015/12/02/delargodt/delargodtblackitalic.ttf') format('ttf');
+  font-display: swap;
+}
+
+#preview-render {
+  font-family: 'delargodtblackitalic', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 32px;
+  color: #373c44;
+}
+
+@font-face {
+  font-family: 'GothamRounded-Bold';
+  src: url('https://static.wfonts.com/data/2015/06/27/gotham-rounded/GothamRounded-Bold.otf') format('otf');
+  font-display: swap;
+}
+
+#preview-render {
+  font-family: 'GothamRounded-Bold', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 32px;
+  color: #373c44;
+}
+
+@font-face {
+  font-family: 'SourceSansPro-Black';
+  src: url('https://static.wfonts.com/data/2016/02/17/source-sans-pro/SourceSansPro-Black.ttf') format('ttf');
+  font-display: swap;
+}
+
+#preview-render {
+  font-family: 'SourceSansPro-Black', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 32px;
+  color: #373c44;
+}
+
+@font-face {
+  font-family: 'Merriweather-Black';
+  src: url('https://static.wfonts.com/data/2016/02/15/merriweather/Merriweather-Black.ttf') format('ttf');
+  font-display: swap;
+}
+
+#preview-render {
+  font-family: 'Merriweather-Black', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 32px;
+  color: #373c44;
+}
+
+@font-face {
+  font-family: 'RobotoMono-Bold';
+  src: url('https://static.wfonts.com/data/2016/05/18/roboto-mono/RobotoMono-Bold.ttf') format('ttf');
+  font-display: swap;
+}
+
+#preview-render {
+  font-family: 'RobotoMono-Bold', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 32px;
+  color: #373c44;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, delargodtblackitalic, GothamRounded-Bold, Merriweather-Black, SourceSansPro-Black;
   line-height: 1.5;
   font-weight: 400;
 
@@ -75,7 +135,7 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
+  font-family: Merriweather-Black;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
@@ -105,7 +165,7 @@ button:focus-visible {
   margin-top: 20px;
   width: 100%;
   border-collapse: collapse;
-  font-family: monospace;
+  font-family: RobotoMono-Bold;
 }
 
 .temp-table th, .temp-table td {
@@ -189,6 +249,7 @@ button + button {
 .home-content .description {
   color: #aaa;
   font-size: 1.2em;
+  font-family: GothamRounded-Bold;
   max-width: 600px;
   margin: 0 auto;
 }

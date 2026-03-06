@@ -30,7 +30,10 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared
-    command: tunnel --url nginx:80
+    container_name: cloudflared
+    command: tunnel --config /etc/cloudflared/config.yml run
+    volumes:
+      - ./cloudflared:/etc/cloudflared:ro
     depends_on:
       - nginx
     networks:

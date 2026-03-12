@@ -245,7 +245,9 @@ DOMAIN=example.com
 
 # --- Cloudflare Configuration ---
 # Get from Cloudflare Dashboard > API Tokens > Create Custom Token
-# Required permissions: Account > Cloudflare Tunnel:Edit, Zone > DNS:Edit
+# Required permissions:
+#   Account > Cloudflare Tunnel:Edit
+#   Zone > DNS:Edit
 CLOUDFLARE_API_TOKEN=
 # Get from Cloudflare Dashboard > Overview > Account ID (at the bottom)
 CLOUDFLARE_ACCOUNT_ID=
@@ -349,6 +351,7 @@ show_usage() {
     echo "  --env          Create/update .env file"
     echo "  --py           Setup Python virtual environment"
     echo "  --npm          Install npm packages"
+    echo "  --dev          Same as running --env --py --npm"
     echo "  --cloudflared  Install cloudflared and setup tunnel"
     echo "  --help         Show this help message"
     echo
@@ -384,6 +387,11 @@ main() {
                 do_py=true
                 ;;
             --npm)
+                do_npm=true
+                ;;
+            --dev)
+                do_env=true
+                do_py=true
                 do_npm=true
                 ;;
             --cloudflared)

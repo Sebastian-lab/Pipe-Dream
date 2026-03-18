@@ -84,25 +84,15 @@ a:hover {
 
 body {
   margin: 0;
-  display: block;
-  min-width: 320px;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
 #app {
+  flex: 1;
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -322,25 +312,33 @@ button + button {
   color: #fff;
 }
 
+#footer-container {
+  width: 100%;
+  padding: 0;
+}
+
 .site-footer {
+  width: 100%;
   background-color: #1a1a1a;
   border-top: 1px solid #333;
   text-align: left;
-  margin: 0;
 }
 
 .footer-content {
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .footer-row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   margin: 0;
-  padding: 20px;
+  padding: 1.25rem;
   border-bottom: 1px solid #333;
+  box-sizing: border-box;
 }
 
 .footer-section.contributors{
@@ -350,8 +348,7 @@ button + button {
   padding: 0;
 }
 .footer-section.version {
-  padding: 0;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .footer-section.contributors h4,
@@ -390,7 +387,7 @@ button + button {
 }
 
 .attribution-section {
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 .attribution-toggle {

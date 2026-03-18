@@ -87,25 +87,21 @@ body {
   display: block;
   min-width: 320px;
   min-height: 100vh;
-  padding: 2rem;
+  padding-top: 72px;
 }
 
 #app {
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
 .logo {
@@ -197,7 +193,6 @@ button + button {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 1rem;
   min-height: 400px;
 }
 
@@ -320,4 +315,92 @@ button + button {
 
 .predictions-meta strong {
   color: #fff;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  max-width: 100%;
+}
+
+.header-logo .logo-img {
+  height: 40px;
+  width: auto;
+}
+
+.header-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.header-auth {
+  display: flex;
+  gap: 12px;
+}
+
+.auth-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-btn-primary {
+  background-color: #646cff;
+  border: 1px solid #646cff;
+  color: #fff;
+}
+
+.auth-btn-primary:hover {
+  background-color: #535bf2;
+  border-color: #535bf2;
+}
+
+.auth-btn-secondary {
+  background-color: transparent;
+  border: 1px solid #646cff;
+  color: #646cff;
+}
+
+.auth-btn-secondary:hover {
+  background-color: #646cff;
+  color: #fff;
+}
+
+@media (prefers-color-scheme: light) {
+  .header {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .auth-btn-primary {
+    background-color: #213547;
+    border-color: #213547;
+  }
+
+  .auth-btn-primary:hover {
+    background-color: #1a1a1a;
+  }
+
+  .auth-btn-secondary {
+    border-color: #213547;
+    color: #213547;
+  }
+
+  .auth-btn-secondary:hover {
+    background-color: #213547;
+    color: #fff;
+  }
 }

@@ -4,9 +4,11 @@ import { setupWeatherWidget } from './components/WeatherWidget'
 import { fetchPredictions } from './api/weather'
 import type { Prediction } from './types'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+document.body.innerHTML = `
   <div id="header-container"></div>
-  <div id="content-container"></div>
+  <div id="app">
+    <div id="content-container"></div>
+  </div>
 `;
 
 const contentContainer = document.querySelector<HTMLDivElement>('#content-container')!;

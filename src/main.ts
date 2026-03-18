@@ -1,6 +1,7 @@
 import './style.css'
 import { setupHeader, getPredictionsContainer, getCitySelect } from './components/Header'
 import { setupWeatherWidget } from './components/WeatherWidget'
+import { setupFooter } from './components/Footer'
 import { fetchPredictions } from './api/weather'
 import type { Prediction } from './types'
 
@@ -93,3 +94,7 @@ function renderPredictionsTable(city: string) {
 }
 
 loadPredictions();
+
+setupFooter(
+  document.querySelector<HTMLDivElement>('#footer-container')!
+);

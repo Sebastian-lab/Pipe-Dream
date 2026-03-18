@@ -84,6 +84,20 @@ a:hover {
 
 body {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#app {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
   min-width: 320px;
   min-height: 100vh;
   padding-top: 72px;
@@ -331,11 +345,141 @@ button + button {
   color: #fff;
 }
 
+#footer-container {
+  width: 100%;
+  padding: 0;
+}
+
+.site-footer {
+  width: 100%;
+  background-color: #1a1a1a;
+  border-top: 1px solid #333;
+  text-align: left;
+}
+
+.footer-content {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-row {
 .header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.25rem;
+  border-bottom: 1px solid #333;
+  box-sizing: border-box;
+}
+
+.footer-section.contributors{
+  padding: 0;
+}
+.footer-section.contact{
+  padding: 0;
+}
+.footer-section.version {
+  margin-top: 25px;
+}
+
+.footer-section.contributors h4,
+.footer-section.contact h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.9em;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: GothamRounded-Bold, system-ui, sans-serif;
+}
+
+.footer-section.contributors p,
+.footer-section.contact p {
+  margin: 0;
+  font-size: 1em;
+  color: #fff;
+}
+
+.footer-section.contact a {
+  color: #646cff;
+}
+
+.footer-section.contact a:hover {
+  color: #535bf2;
+}
+
+.version-badge {
+  display: inline-block;
+  background-color: #333;
+  color: #aaa;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  font-family: RobotoMono-Bold, monospace;
+}
+
+.attribution-section {
+  padding: 1.25rem;
+}
+
+.attribution-toggle {
+  background: transparent;
+  border: 1px solid #444;
+  color: #aaa;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.attribution-toggle:hover {
+  background-color: #2a2a2a;
+  border-color: #555;
+  color: #fff;
+}
+
+.attribution-toggle:focus {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+.toggle-icon {
+  font-size: 0.8em;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.attribution-content {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+  border: 1px solid #333;
+}
+
+.attribution-content p {
+  margin: 0;
+  color: #aaa;
+  font-size: 0.95em;
+}
+
+@media (max-width: 600px) {
+  .footer-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .footer-section {
+    min-width: 100%;
   padding: 1rem 2rem;
   background-color: #1a1a1a;
   border-bottom: 1px solid #333;

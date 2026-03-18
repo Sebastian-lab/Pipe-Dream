@@ -84,23 +84,10 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-#app {
-  flex: 1;
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
   min-width: 320px;
   min-height: 100vh;
-  padding-top: 72px;
+  display: flex;
+  flex-direction: column;
 }
 
 #header-container {
@@ -113,17 +100,18 @@ body {
 }
 
 #app {
+  flex: 1;
   max-width: 1280px;
   margin: 0 auto;
-  text-align: center;
-  padding: 0 2rem;
+  padding: 72px 2rem 0;
   width: 100%;
   box-sizing: border-box;
+  text-align: center;
 }
 
 @media (max-width: 600px) {
   #app {
-    padding: 0 1rem;
+    padding: 72px 1rem 0;
   }
 }
 
@@ -348,6 +336,7 @@ button + button {
 #footer-container {
   width: 100%;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .site-footer {
@@ -363,7 +352,6 @@ button + button {
 }
 
 .footer-row {
-.header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -480,6 +468,14 @@ button + button {
   
   .footer-section {
     min-width: 100%;
+  }
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem 2rem;
   background-color: #1a1a1a;
   border-bottom: 1px solid #333;

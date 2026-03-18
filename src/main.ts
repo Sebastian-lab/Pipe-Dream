@@ -10,6 +10,7 @@ document.body.innerHTML = `
   <div id="app">
     <div id="content-container"></div>
   </div>
+  <div id="footer-container"></div>
 `;
 
 const contentContainer = document.querySelector<HTMLDivElement>('#content-container')!;

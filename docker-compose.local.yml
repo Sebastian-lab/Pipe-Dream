@@ -23,6 +23,8 @@ services:
     environment:
       - VITE_API_URL=http://localhost:8000
       - VITE_PROXY_TARGET=http://backend:8000
+    volumes:
+      - ./src:/app/src
     networks:
       - app-network
     ports:

@@ -1,18 +1,18 @@
-import type { CityReading, Prediction } from '../types';
+import type { CityReading, Prediction } from "../types";
 
 // Use relative URL (works with nginx proxy) or environment variable for local dev
-const API_BASE_URL = import.meta.env.VITE_API_URL || '';
-const API_KEY = import.meta.env.VITE_API_KEY || '';
+const API_BASE_URL = import.meta.env.VITE_API_URL || "";
+const API_KEY = import.meta.env.VITE_API_KEY || "";
 
 export async function fetchWeatherReadings(): Promise<CityReading[]> {
   const response = await fetch(`${API_BASE_URL}/api/weather`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'X-API-Key': API_KEY,
+      "Content-Type": "application/json",
+      "X-API-Key": API_KEY,
     },
   });
-  
+
   if (!response.ok) {
     const errorMessage = await getErrorMessage(response);
     throw new Error(errorMessage);
@@ -23,13 +23,13 @@ export async function fetchWeatherReadings(): Promise<CityReading[]> {
 
 export async function fetchWeatherHistory(): Promise<any> {
   const response = await fetch(`${API_BASE_URL}/api/weather/history`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'X-API-Key': API_KEY,
+      "Content-Type": "application/json",
+      "X-API-Key": API_KEY,
     },
   });
-  
+
   if (!response.ok) {
     const errorMessage = await getErrorMessage(response);
     throw new Error(errorMessage);
@@ -41,7 +41,9 @@ export async function fetchWeatherHistory(): Promise<any> {
 async function getErrorMessage(response: Response): Promise<string> {
   try {
     const errorData = await response.json();
-    return errorData.detail || `HTTP ${response.status}: ${response.statusText}`;
+    return (
+      errorData.detail || `HTTP ${response.status}: ${response.statusText}`
+    );
   } catch {
     return `HTTP ${response.status}: ${response.statusText}`;
   }
@@ -49,13 +51,13 @@ async function getErrorMessage(response: Response): Promise<string> {
 
 export async function fetchPredictions(): Promise<Prediction[]> {
   const response = await fetch(`${API_BASE_URL}/api/predictions`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'X-API-Key': API_KEY,
+      "Content-Type": "application/json",
+      "X-API-Key": API_KEY,
     },
   });
-  
+
   if (!response.ok) {
     const errorMessage = await getErrorMessage(response);
     throw new Error(errorMessage);

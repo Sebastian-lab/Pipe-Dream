@@ -1,3 +1,5 @@
+import { initGraphComponent } from './Graph';
+
 export type Tab = 'home' | 'chart' | 'graph' | 'report' | 'contact';
 
 export function setupHeader(headerContainer: HTMLElement, contentContainer: HTMLElement) {
@@ -34,14 +36,16 @@ export function setupHeader(headerContainer: HTMLElement, contentContainer: HTML
       </div>
       
       <div id="graph-content" class="tab-content" style="display: none;">
-        <div id="predictions-container">
-          <div class="predictions-header">
-            <label for="city-select">Select City: </label>
-            <select id="city-select">
+        <div class="graph-container">
+          <div class="graph-header">
+            <label for="graph-city-select">Select City: </label>
+            <select id="graph-city-select">
               <option value="">Loading cities...</option>
             </select>
           </div>
-          <div id="predictions-table-container"></div>
+          <div id="graph-canvas-container" class="chart-wrapper">
+            <p class="loading-text">Loading chart...</p>
+          </div>
         </div>
       </div>
       
@@ -68,6 +72,10 @@ export function setupHeader(headerContainer: HTMLElement, contentContainer: HTML
 
     if (activeBtn) activeBtn.classList.add('active');
     if (activeContent) activeContent.style.display = 'block';
+
+    if (tab === 'graph') {
+      initGraphComponent();
+    }
   }
 
   headerContainer.querySelectorAll('.tab-btn').forEach(btn => {

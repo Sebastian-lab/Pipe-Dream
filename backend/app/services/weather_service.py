@@ -38,8 +38,13 @@ def get_city_readings():
     return cities
 
 
-def get_city_history(limit: int = 600):
-    """Get weather data history - returns last N readings per city."""
+def get_city_history():
+    """Get weather data history - returns latest reading per city."""
+    return get_city_readings()
+
+
+def get_city_history_graph(limit: int = 600):
+    """Get weather data history for graphing - returns last N readings per city."""
     collection = get_db_collection("readings")
     results = []
     

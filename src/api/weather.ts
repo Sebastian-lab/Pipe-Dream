@@ -38,6 +38,23 @@ export async function fetchWeatherHistory(): Promise<any> {
   return response.json();
 }
 
+export async function fetchWeatherHistoryGraph(limit: number = 600): Promise<any> {
+  const response = await fetch(`${API_BASE_URL}/api/weather/history/graph?limit=${limit}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-Key": API_KEY,
+    },
+  });
+
+  if (!response.ok) {
+    const errorMessage = await getErrorMessage(response);
+    throw new Error(errorMessage);
+  }
+
+  return response.json();
+}
+
 async function getErrorMessage(response: Response): Promise<string> {
   try {
     const errorData = await response.json();

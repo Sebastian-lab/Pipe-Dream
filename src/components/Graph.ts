@@ -8,7 +8,7 @@ import {
   TimeScale,
 } from "chart.js";
 import "chartjs-plugin-annotation";
-import { fetchWeatherHistory, fetchPredictions } from "../api/weather";
+import { fetchWeatherHistoryGraph, fetchPredictions } from "../api/weather";
 
 Chart.register(...registerables);
 Chart.register(
@@ -53,7 +53,7 @@ export async function initGraphComponent(): Promise<void> {
 
   try {
     const [history, predictions] = await Promise.all([
-      fetchWeatherHistory(),
+      fetchWeatherHistoryGraph(),
       fetchPredictions(),
     ]);
 
